@@ -1,4 +1,4 @@
-package com.tfg.Tienda;
+package com.tfg.tienda;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,27 @@
+ul {
+    display: flex; /* Activa el modelo de flexbox */
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding */
+    border: 1px solid black;
+    display: flex;
+    justify-content: flex-end;
+    
+    
+}
+
+li {
+    margin-right: 10px; /* Espacio entre los elementos */
+    border: 1px solid black;
+    padding: 2%;
+    margin: 0;
+    display: inline; /* Muestra los elementos de la lista en línea */
+    margin: 0 15px;
+}
+.der {
+    margin-left: 100%;
+}
+
+.iz {
+    margin-right: 10px;
+}
+
