@@ -1,6 +1,5 @@
 package com.tfg.tienda.security;
 
-import java.net.Authenticator;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -18,7 +17,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 
@@ -40,6 +38,7 @@ public class JWTProvider {
                 .setSubject(Long.toString(user.getId()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + (tiempo * 1000)))
+                .claim("id", user.getId())
                 .claim("usuario", user.getUsername())
                 .claim("email", user.getEmail())
                 .claim("role", user.getAuthorities())

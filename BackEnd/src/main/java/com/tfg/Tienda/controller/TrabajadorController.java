@@ -21,8 +21,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 @RestController
-@RequestMapping("/usuario")
-public class UserController {
+@RequestMapping("/trabajador")
+public class TrabajadorController {
     @Autowired
     private JWTProvider tokenProvider;
     @Autowired

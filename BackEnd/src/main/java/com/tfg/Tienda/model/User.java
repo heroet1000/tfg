@@ -4,27 +4,28 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import jakarta.enterprise.inject.Default;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.*;
-import jakarta.ws.rs.DefaultValue;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"  // Usa el campo "id" como identificador único
+)
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class User implements UserDetails {
+public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -33,6 +34,9 @@ public class User implements UserDetails {
     private String username;
 
     private String nombre;
+    private String ap1;
+    @Column(nullable = true)
+    private String ap2;
 
     private String password;
 
@@ -49,10 +53,18 @@ public class User implements UserDetails {
     private String email;
 
     private Long numero;
+    @ManyToMany
+    @JoinTable(
+        name = "carrito",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "producto_id"))
+    private List<Producto> carrito;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<UserRole> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Factura> facturas = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -87,9 +99,11 @@ public class User implements UserDetails {
     public String getEmail() {
         return this.email;
     }
-    public User(String usuario, String nombre, String contrasena, String email, String direccion,Long codPostal, Long piso, Long numero, List<UserRole> roles){
+    public User(String usuario, String nombre, String ap1, String ap2, String contrasena, String email, String direccion,Long codPostal, Long piso, Long numero, List<UserRole> roles){
         this.username=usuario;
         this.nombre=nombre;
+        this.ap1=ap1;
+        this.ap2=ap2;
         this.password=contrasena;
         this.email=email;
         this.direccion=direccion;
@@ -98,11 +112,15 @@ public class User implements UserDetails {
         this.numero=numero;
         this.roles=roles;
     }
-    public User(String usuario, String nombre, String contrasena, String email, List<UserRole> roles){
+    @Builder
+    public User(String usuario, String nombre, String ap1, String ap2, String contrasena, String email, List<UserRole> roles){
         this.username=usuario;
         this.nombre=nombre;
+        this.ap1=ap1;
+        this.ap2=ap2;
         this.password=contrasena;
         this.email=email;
         this.roles=roles;
     }
+
 }
