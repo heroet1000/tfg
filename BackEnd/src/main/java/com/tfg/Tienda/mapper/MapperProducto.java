@@ -9,6 +9,7 @@ import com.tfg.tienda.model.Producto;
 public interface MapperProducto extends MapperGenerico<ProductoDTO,Producto>{
     @Override
     @Mapping(target="usuarios", ignore=true)
+    @Mapping(target = "detallesFactura", ignore = true)
     Producto aEntidad(ProductoDTO dto);
 
 }

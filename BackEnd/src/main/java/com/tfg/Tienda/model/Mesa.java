@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,20 +19,18 @@ import lombok.Setter;
     generator = ObjectIdGenerators.PropertyGenerator.class,
     property = "id"  // Usa el campo "id" como identificador único
 )
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class Juegos {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@NoArgsConstructor
+@AllArgsConstructor
+public class Mesa {
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-    private String nombre;
-    private String descripcion;
-    private Double precio;
-    @Enumerated(EnumType.STRING)
-    private EstadoJuego estado;
+    private Long tamaño;
     @Lob  // Para campos grandes (en MySQL se mapea a LONGTEXT)
     @Column(name = "imagen", columnDefinition = "LONGTEXT")
     private String imagen;
+
 }

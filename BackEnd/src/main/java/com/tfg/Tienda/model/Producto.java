@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -52,5 +53,8 @@ public class Producto {
     @JsonIgnore
     @OneToMany(mappedBy = "producto")
     private List<DetallesFactura> detallesFactura;
+    @Lob  // Para campos grandes (en MySQL se mapea a LONGTEXT)
+    @Column(name = "imagen", columnDefinition = "LONGTEXT")
+    private String imagen;
     
 }

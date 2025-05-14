@@ -6,13 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tfg.tienda.dto.JuegosDTO;
-import com.tfg.tienda.dto.ProductoDTO;
 import com.tfg.tienda.mapper.MapperJuego;
-import com.tfg.tienda.mapper.MapperProducto;
 import com.tfg.tienda.model.Juegos;
-import com.tfg.tienda.model.Producto;
 import com.tfg.tienda.repository.JuegoRepository;
-import com.tfg.tienda.repository.ProductoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -34,5 +30,8 @@ public class JuegoService {
     public void delete(JuegosDTO dto){
         Juegos juego= repo.findById(dto.id()).orElseThrow(()->new EntityNotFoundException("No se encuentra el producto"));
         repo.delete(juego);
+    }
+    public Optional<Juegos> findById(Long id){
+        return repo.findById(id);
     }
 }

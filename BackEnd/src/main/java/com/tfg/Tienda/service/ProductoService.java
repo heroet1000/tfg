@@ -31,5 +31,9 @@ public class ProductoService {
         Producto producto= repo.findById(dto.id()).orElseThrow(()->new EntityNotFoundException("No se encuentra el producto"));
         repo.delete(producto);
     }
+    public Optional<Producto> findById(Long id){
+        return repo.findById(id);
+    }
 
 }
+
