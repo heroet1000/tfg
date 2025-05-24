@@ -29,6 +29,8 @@ public class DetallesAlquiler {
     private Long id;
     private String nombreJuego;
     private String precioAlquiler;
+    private Long iva;
+    private String nombre;
     @ManyToOne
     @JoinColumn(name = "id_alquiler", nullable = false)
     private Alquiler alquiler;

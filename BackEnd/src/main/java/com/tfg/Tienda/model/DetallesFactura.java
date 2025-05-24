@@ -29,6 +29,7 @@ public class DetallesFactura {
     private Long cantidad;
     private String nombreProducto;
     private Double precioProducto;
+    private Long iva;
     @ManyToOne
     @JoinColumn(name = "id_factura", nullable = false)
     private Factura factura;

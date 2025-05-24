@@ -39,7 +39,7 @@ public class TrabajadorController {
     }
     @PostMapping("/login")
     public UserDTO login(@RequestBody LoginDTO loginDTO){
-        Authentication authDTO = new UsernamePasswordAuthenticationToken(loginDTO.usuario(), loginDTO.contrasena());
+        Authentication authDTO = new UsernamePasswordAuthenticationToken(loginDTO.username(), loginDTO.password());
 
         Authentication authentication = this.authManager.authenticate(authDTO);
         User user = (User) authentication.getPrincipal();

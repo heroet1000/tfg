@@ -1,27 +1,107 @@
-ul {
-    display: flex; /* Activa el modelo de flexbox */
-    list-style-type: none; /* Elimina los puntos de la lista */
-    padding: 0; /* Elimina el padding */
-    border: 1px solid black;
-    display: flex;
-    justify-content: flex-end;
-    
-    
+.nav-container {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0 10px;
+  height: 40px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-li {
-    margin-right: 10px; /* Espacio entre los elementos */
-    border: 1px solid black;
-    padding: 2%;
-    margin: 0;
-    display: inline; /* Muestra los elementos de la lista en línea */
-    margin: 0 15px;
-}
-.der {
-    margin-left: 100%;
-}
-
-.iz {
-    margin-right: 10px;
+/* Lista de navegación */
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
+/* Items de navegación */
+.nav-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Separadores verticales */
+.with-separator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background-color: #e2e8f0;
+}
+
+/* Contenedor de botones a la derecha */
+.button-container {
+  display: flex;
+  margin-left: auto;
+  gap: 8px;
+  padding-left: 12px;
+}
+
+/* Separador entre opciones y botones */
+.button-container::before {
+  content: '';
+  height: 60%;
+  width: 1px;
+  background-color: #e2e8f0;
+  margin-right: 12px;
+}
+
+/* Enlaces */
+.nav-link {
+  text-decoration: none;
+  color: #4a5568;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.nav-link:hover {
+  color: #4299e1;
+}
+
+/* Botones */
+.nav-btn {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid;
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.login-btn {
+  background: transparent;
+  border-color: #4299e1;
+  color: #4299e1;
+}
+
+.login-btn:hover {
+  background: #ebf8ff;
+}
+
+.register-btn {
+  background: #4299e1;
+  border-color: #4299e1;
+  color: white;
+}
+
+.register-btn:hover {
+  background: #3182ce;
+  border-color: #3182ce;
+}

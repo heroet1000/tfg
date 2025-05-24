@@ -14,12 +14,13 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
     private Long id;
-    private String usuario;
-    private String contrasena;
+    private String username;
     private String nombre;
     private String ap1;
     private String ap2;
     private String email;
+    private Double monedero;
     private List<UserRole> roles;
     private String token;
+    private Long tel;
 }

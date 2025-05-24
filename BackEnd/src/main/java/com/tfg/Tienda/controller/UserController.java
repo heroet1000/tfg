@@ -13,6 +13,7 @@ import com.tfg.tienda.security.JWTProvider;
 import com.tfg.tienda.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +40,7 @@ public class UserController {
     }
     @PostMapping("/login")
     public UserDTO login(@RequestBody LoginDTO loginDTO){
-        Authentication authDTO = new UsernamePasswordAuthenticationToken(loginDTO.usuario(), loginDTO.contrasena());
+        Authentication authDTO = new UsernamePasswordAuthenticationToken(loginDTO.username(), loginDTO.password());
 
         Authentication authentication = this.authManager.authenticate(authDTO);
         User user = (User) authentication.getPrincipal();
@@ -47,6 +48,7 @@ public class UserController {
         String token = this.tokenProvider.generateToken(authentication);
         System.out.println(token);
         UserDTO dto=mapper.aDTO(user);
+        System.out.println(dto);
         dto.setRoles(user.getAuthorities().stream().map(GrantedAuthority::getAuthority).map(role -> role.replace("ROLE_", "")).map(UserRole::valueOf).toList());
         dto.setToken(token);
         return dto;

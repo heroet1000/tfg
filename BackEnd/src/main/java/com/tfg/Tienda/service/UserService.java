@@ -38,11 +38,8 @@ public class UserService{
     }
     public User edit(UserDTO dto){
         User usuario=repositorio.findById(dto.getId()).orElseThrow(()->new EntityNotFoundException("No se encuentra el usuario"));
-        Optional.ofNullable(dto.getUsuario()).ifPresent(usuario::setNombre);
+        Optional.ofNullable(dto.getUsername()).ifPresent(usuario::setNombre);
         Optional.ofNullable(dto.getEmail()).ifPresent(usuario::setEmail);
-        Optional.ofNullable(dto.getContrasena())
-        .map(passwordEncoder::encode)
-        .ifPresent(usuario::setPassword);
         Optional.ofNullable(dto.getNombre()).ifPresent(usuario::setNombre);
         Optional.ofNullable(dto.getAp1()).ifPresent(usuario::setAp1);
         usuario.setAp2(dto.getAp2());
