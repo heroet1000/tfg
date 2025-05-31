@@ -1,9 +1,99 @@
-<div class="Titulo">INICIAR SESIÓN</div>
-<div class="Formulario">
-    <label>Usuario</label><br>
-    <input type="text" [(ngModel)]="registerData.usuario"><br>
-    <label>Contraseña</label><br>
-    <input type="password" [(ngModel)]="registerData.contrasena"><br>
-    <button type="submit">Iniciar Sesion</button>
-    <button>registrarse</button>
+<div class="form-container">
+  <h2>Registro de Usuario</h2>
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+
+    <!-- Usuario -->
+    <div class="form-group">
+      <label>Usuario*</label>
+      <input type="text" [(ngModel)]="registerData.usuario" name="usuario" 
+             required minlength="4" maxlength="20" #usuario="ngModel">
+      <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="error">
+        <div *ngIf="usuario.errors?.['required']">Campo obligatorio</div>
+        <div *ngIf="usuario.errors?.['minlength']">Mínimo 4 caracteres</div>
+        <div *ngIf="usuario.errors?.['maxlength']">Máximo 20 caracteres</div>
+      </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group">
+      <label>Contraseña*</label>
+      <input type="password" [(ngModel)]="registerData.contrasena" name="contrasena"
+             required minlength="6" #contrasena="ngModel">
+      <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error">
+        <div *ngIf="contrasena.errors?.['required']">Campo obligatorio</div>
+        <div *ngIf="contrasena.errors?.['minlength']">Mínimo 6 caracteres</div>
+      </div>
+    </div>
+
+    <!-- Confirmar Contraseña -->
+    <div class="form-group">
+      <label>Confirmar Contraseña*</label>
+      <input type="password" [(ngModel)]="registerData.contrasena2" name="contrasena2"
+             required #contrasena2="ngModel">
+      <div *ngIf="(!passwordsMatch() && registerData.contrasena2) || (contrasena2.invalid && contrasena2.touched)" class="error">
+        <div *ngIf="!passwordsMatch()">Las contraseñas no coinciden</div>
+      </div>
+    </div>
+
+    <!-- Nombre -->
+    <div class="form-group">
+      <label>Nombre*</label>
+      <input [(ngModel)]="registerData.nombre" name="nombre" 
+             required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+" #nombre="ngModel">
+      <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error">
+        <div *ngIf="nombre.errors?.['required']">Campo obligatorio</div>
+      </div>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Primer Apellido*</label>
+        <input [(ngModel)]="registerData.ap1" name="ap1" 
+               required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+" #ap1="ngModel">
+               <div *ngIf="ap1.invalid && (ap1.dirty || ap1.touched)" class="error">
+        <div *ngIf="ap1.errors?.['required']">Campo obligatorio</div>
+        <div *ngIf="ap1.errors?.['minlength']">Mínimo 6 caracteres</div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label>Segundo Apellido</label>
+        <input [(ngModel)]="registerData.ap2" name="ap2"
+               pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+">
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label>Email*</label>
+      <input type="email" [(ngModel)]="registerData.email" name="email"
+             required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #email="ngModel">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+        <div *ngIf="email.errors?.['required']">Campo obligatorio</div>
+        <div *ngIf="email.errors?.['pattern']">Formato de email inválido</div>
+      </div>
+    </div>
+
+    <!-- Teléfono (obligatorio) -->
+    <div class="form-group">
+  <label>Teléfono*</label>
+  <input type="tel" 
+         [(ngModel)]="registerData.tel" 
+         name="tel"
+         #tel="ngModel"
+         required
+         (input)="formatPhone($event)"
+         [class.invalid]="!validPhone() && tel.touched">
+         
+  <div *ngIf="tel.invalid && tel.touched" class="error">
+    <div *ngIf="tel.errors?.['required']">Teléfono es requerido</div>
+  </div>
+  <div *ngIf="!validPhone() && registerData.tel && tel.touched" class="error">
+    El teléfono debe tener 9 dígitos y comenzar con 6, 7 u 8
+  </div>
+</div>
+    <button type="submit" [disabled]="registerForm.invalid || !passwordsMatch() || !validPhone()">
+      Registrarse
+    </button>
+  </form>
 </div>

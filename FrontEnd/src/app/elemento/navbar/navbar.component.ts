@@ -4,6 +4,7 @@ import { LogoComponent } from "../logo/logo.component";
 import { CommonModule } from '@angular/common';
 import { RegisterFormComponent } from '../../form/register-form/register-form.component';
 import { LoginFormComponent } from '../../form/login-form/login-form.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,11 @@ import { LoginFormComponent } from '../../form/login-form/login-form.component';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private dialog: MatDialog) {}
+  user={
+    username:"usuario",
+    img:"",
+  }
+  constructor(private dialog: MatDialog, private service:AuthService) {}
 
   openRegister(): void {
     const dialogRef = this.dialog.open(RegisterFormComponent, {
@@ -33,5 +38,16 @@ export class NavbarComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo de login se cerró');
     });
+  }
+  islogin(){
+    console.log(this.service.isLoggedIn());
+    if(this.service.isLoggedIn()){
+      this.user.username=this.service.getUsername();
+
+    }
+    return this.service.isLoggedIn();
+  }
+  logOut(){
+    this.service.logout();
   }
 }

@@ -40,7 +40,9 @@ public class UserController {
     }
     @PostMapping("/login")
     public UserDTO login(@RequestBody LoginDTO loginDTO){
-        Authentication authDTO = new UsernamePasswordAuthenticationToken(loginDTO.username(), loginDTO.password());
+        System.out.println(loginDTO.usuario());
+        System.out.println(loginDTO.contrasena());
+        Authentication authDTO = new UsernamePasswordAuthenticationToken(loginDTO.usuario(), loginDTO.contrasena());
 
         Authentication authentication = this.authManager.authenticate(authDTO);
         User user = (User) authentication.getPrincipal();

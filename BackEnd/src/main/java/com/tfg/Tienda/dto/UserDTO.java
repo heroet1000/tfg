@@ -22,5 +22,5 @@ public class UserDTO {
     private Double monedero;
     private List<UserRole> roles;
     private String token;
-    private Long tel;
+    private String tel;
 }

@@ -1,9 +1,57 @@
-<div class="Titulo">INICIAR SESIÓN</div>
-<div class="Formulario">
-    <label>Usuario</label><br>
-    <input type="text" [(ngModel)]="loginData.usuario"><br>
-    <label>Contraseña</label><br>
-    <input type="password" [(ngModel)]="loginData.contrasena"><br>
-    <button type="submit" (click)="onSubmit()">Iniciar Sesion</button>
-    <button>registrarse</button>
+<div class="login-container">
+  <div class="titulo">INICIAR SESIÓN</div>
+  
+  <form class="formulario" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <!-- Campo Usuario -->
+    <div class="form-group">
+      <label>Usuario*</label>
+      <input type="text" 
+             [(ngModel)]="loginData.usuario" 
+             name="usuario"
+             #usuario="ngModel"
+             required
+             minlength="4"
+             [disabled]="isLoading">
+      
+      <div *ngIf="usuario.invalid && (usuario.touched || formSubmitted)" class="error-message">
+        <div *ngIf="usuario.errors?.['required']">El usuario es requerido</div>
+        <div *ngIf="usuario.errors?.['minlength']">Mínimo 4 caracteres</div>
+      </div>
+    </div>
+
+    <!-- Campo Contraseña -->
+    <div class="form-group">
+      <label>Contraseña*</label>
+      <input type="password" 
+             [(ngModel)]="loginData.contrasena" 
+             name="contrasena"
+             #contrasena="ngModel"
+             required
+             minlength="6"
+             [disabled]="isLoading">
+      
+      <div *ngIf="contrasena.invalid && (contrasena.touched || formSubmitted)" class="error-message">
+        <div *ngIf="contrasena.errors?.['required']">La contraseña es requerida</div>
+        <div *ngIf="contrasena.errors?.['minlength']">Mínimo 6 caracteres</div>
+      </div>
+    </div>
+
+    <!-- Mensaje de error del servidor -->
+    <div *ngIf="errorMessage" class="error-message server-error">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Botones -->
+    <div class="button-group">
+      <button type="submit" class="btn-login" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Iniciar Sesión</span>
+        <span *ngIf="isLoading">
+          <span class="loading-spinner"></span> Procesando...
+        </span>
+      </button>
+      <button type="button" class="btn-register" (click)="onRegister()" [disabled]="isLoading">
+        Registrarse
+      </button>
+    </div>
+  </form>
 </div>

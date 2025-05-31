@@ -59,8 +59,8 @@ export class AuthService {
    * @param userData Datos del nuevo usuario (nombre, email, password)
    * @returns Observable con la respuesta del servidor
    */
-  register(userData: {nombre: string, email: string, password: string}): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData);
+  register(userData: {usuario: string, contrasena:string, contrasena2:string, nombre: string, ap1:string, ap2:string | null, email: string,tel:string}): Observable<any> {
+    return this.http.post(`${this.apiUrl}/save`, userData);
   }
 
   /**
@@ -191,4 +191,11 @@ export class AuthService {
   getUserChanges(): Observable<void> {
     return this.userChangedSubject.asObservable();
   }
+  iniciado(){
+  return sessionStorage.getItem("user_data")!== null;
+}
+getUsername(){
+  const userData = this.getUserData();
+    return userData?.usuario || null;
+}
 }

@@ -55,7 +55,7 @@ public class User implements UserDetails{
     private Long numero;
 
     private Double monedero=0.0;
-    private Long tel;
+    private String tel;
     @ManyToMany
     @JoinTable(
         name = "carrito",
@@ -102,7 +102,7 @@ public class User implements UserDetails{
     public String getEmail() {
         return this.email;
     }
-    public User(String usuario, String nombre, String ap1, String ap2, String contrasena, String email, String direccion,Long codPostal, Long piso, Long numero, List<UserRole> roles, Long telefono, Double monedero){
+    public User(String usuario, String nombre, String ap1, String ap2, String contrasena, String email, String direccion,Long codPostal, Long piso, Long numero, List<UserRole> roles, String telefono, Double monedero){
         this.username=usuario;
         this.nombre=nombre;
         this.ap1=ap1;
@@ -118,7 +118,7 @@ public class User implements UserDetails{
         this.monedero=monedero;
     }
     @Builder
-    public User(String usuario, String nombre, String ap1, String ap2, String contrasena, String email, List<UserRole> roles, Long telefono, Double monedero){
+    public User(String usuario, String nombre, String ap1, String ap2, String contrasena, String email, List<UserRole> roles, String telefono, Double monedero){
         this.username=usuario;
         this.nombre=nombre;
         this.ap1=ap1;

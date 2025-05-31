@@ -1,7 +1,7 @@
 <app-logo></app-logo>
 <div class="nav-container">
   <ul class="nav-list">
-    <!-- Opciones izquierda con separadores -->
+    <!-- Left options with separators -->
     <li class="nav-item">
       <a class="nav-link" href="#">Objeto1</a>
     </li>
@@ -15,14 +15,16 @@
       <a class="nav-link" href="#">Objeto4</a>
     </li>
     
-    <!-- Contenedor para botones derecha -->
-    <div class="button-container">
-      <li class="nav-item">
-        <button class="nav-btn login-btn" (click)="openLogin()">Iniciar Sesión</button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-btn register-btn"(click)="openRegister()">Registrarse</button>
-      </li>
-    </div>
+    <!-- Right side buttons -->
+    <li class="nav-item button-container" *ngIf="!islogin()">
+      <button class="nav-btn login-btn" (click)="openLogin()">Iniciar Sesión</button>
+      <button class="nav-btn register-btn" (click)="openRegister()">Registrarse</button>
+    </li>
+    
+    <li class="nav-item button-container" *ngIf="islogin()" >
+      <a href="#">{{user.username}}</a>
+      <a href="#"><img [src]="user.img" alt="User profile"></a>
+      <button class="nav-btn register-btn" (click)="logOut()">cerra sesion</button>
+    </li>
   </ul>
 </div>

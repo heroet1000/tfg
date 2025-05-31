@@ -10,7 +10,7 @@ SELECT
     true,
     null,
     null,
-    '$2a$10$xn3LI/AjqicFYZFruSwve.681477XaVNaUQbr1gioaWPn4t1KsnmG', -- admin123
+    "$2a$10$5cIyWt4EBO3iTE7JY8EgV.oa5UKYmWQ/ZX4F0D1lw205EzVR2tTDO", -- admin123
     null,
     'admin'
     
