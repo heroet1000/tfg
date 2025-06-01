@@ -3,6 +3,7 @@ package com.tfg.tienda.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tfg.tienda.dto.CarroDTO;
 import com.tfg.tienda.dto.LoginDTO;
 import com.tfg.tienda.dto.UserDTO;
 import com.tfg.tienda.dto.registerDTO;
@@ -13,7 +14,6 @@ import com.tfg.tienda.security.JWTProvider;
 import com.tfg.tienda.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,6 +59,12 @@ public class UserController {
     public User EditUser(@RequestBody UserDTO dto) {
         return service.edit(dto);
     }
+    @PostMapping("/anadirCarro")
+    public void anadirCarrito(@RequestBody CarroDTO dto) {
+        service.anadirAlCarro(dto);
+        
+    }
+    
 
     
 

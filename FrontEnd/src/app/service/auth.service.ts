@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators'; 
 
 // Interfaz que define la estructura de la respuesta de autenticación que viene del backend
-interface AuthResponse {
+export interface AuthResponse {
   token: string;              // Token JWT para autenticación en peticiones posteriores
   idUsuario: number;          // ID único del usuario autenticado
   email: string;

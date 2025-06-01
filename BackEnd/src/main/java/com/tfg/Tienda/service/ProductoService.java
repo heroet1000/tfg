@@ -1,5 +1,6 @@
 package com.tfg.tienda.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class ProductoService {
     }
     public Optional<Producto> findById(Long id){
         return repo.findById(id);
+    }
+    public List<ProductoDTO> findAll(){
+        List<Producto> lista=repo.findAll();
+        return mapper.toDtoList(lista);
     }
 
 }

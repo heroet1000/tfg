@@ -44,9 +44,6 @@ public class Producto {
     private String descripcion;
     private Double precio;
     private Long cantidad;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id", nullable = false)
-    private Categoria categoria;
     @JsonIgnore
     @ManyToMany(mappedBy = "carrito")
     private List<User> usuarios = new ArrayList<>();
@@ -55,6 +52,6 @@ public class Producto {
     private List<DetallesFactura> detallesFactura;
     @Lob  // Para campos grandes (en MySQL se mapea a LONGTEXT)
     @Column(name = "imagen", columnDefinition = "LONGTEXT")
-    private String imagen;
+    private String imagen = "assets/images/logo.png";
     
 }

@@ -1,1 +1,16 @@
-<p>tienda works!</p>
+<div>
+  <ul>
+    <li *ngFor="let producto of productos">
+      <div class="producto">
+        <img [src]="producto.imagen" [alt]="producto.nombre">
+        <h3>{{producto.nombre}}</h3>
+        <p>Precio: {{producto.precio | currency}}</p>
+        <p *ngIf="producto.cantidad <= 0" class="sin-stock">Agotado</p>
+        <button (click)="agregarAlCarrito(producto)" [disabled]="producto.cantidad <= 0 || producto.agregando">
+          {{ producto.cantidad <= 0 ? 'Sin stock' : 'Añadir al carrito' }} <span *ngIf="producto.agregando"
+            class="spinner"></span>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

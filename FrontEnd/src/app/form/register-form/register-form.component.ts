@@ -66,6 +66,7 @@ registerData = {
       const dialogRef = this.dialog.open(LoginFormComponent, {
         width: '400px'
       });
+      
   
       dialogRef.afterClosed().subscribe(result => {
         console.log('El diálogo de login se cerró');

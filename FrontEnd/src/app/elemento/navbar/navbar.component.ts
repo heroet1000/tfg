@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { RegisterFormComponent } from '../../form/register-form/register-form.component';
 import { LoginFormComponent } from '../../form/login-form/login-form.component';
 import { AuthService } from '../../service/auth.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LogoComponent, CommonModule],
+  imports: [LogoComponent, CommonModule,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
@@ -50,4 +51,5 @@ export class NavbarComponent {
   logOut(){
     this.service.logout();
   }
+  
 }
